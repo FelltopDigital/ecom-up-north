@@ -11,6 +11,11 @@ export const metadata: Metadata = {
   title: "Ecom Up North 2027 — The North's biggest ecommerce event",
   description:
     "One day, eight stages, 250+ speakers and 6,000 retail and ecommerce leaders. Wednesday 14 April 2027, Manchester Central.",
+  // Pre-launch: noindex/nofollow unless ALLOW_INDEXING=true (see next.config.ts)
+  robots:
+    process.env.ALLOW_INDEXING === "true"
+      ? { index: true, follow: true }
+      : { index: false, follow: false, googleBot: { index: false, follow: false } },
 };
 
 export const viewport: Viewport = {
