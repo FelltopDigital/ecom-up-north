@@ -40,9 +40,9 @@ export function Hero() {
 
         <SplitHeading
           as="h1"
-          text="Where the future of commerce heads North"
+          text="The future of commerce is heading North"
           delay={0.3}
-          className="mx-auto mt-7 max-w-5xl font-display text-[clamp(2.75rem,7.5vw,6.25rem)] leading-[0.95] font-semibold tracking-[-0.045em]"
+          className="mx-auto mt-7 max-w-[1500px] font-display text-[clamp(2.75rem,7.5vw,6.25rem)] leading-[0.95] font-semibold tracking-[-0.045em]"
         />
 
         <motion.p
