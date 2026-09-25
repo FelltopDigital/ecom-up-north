@@ -17,7 +17,7 @@ export function Hero() {
     <section id="top" ref={ref} className="relative overflow-hidden pt-36 md:pt-44">
       <Aurora />
 
-      <motion.div style={{ y, opacity }} className="relative z-10 mx-auto max-w-5xl px-4 text-center">
+      <motion.div style={{ y, opacity }} className="relative z-10 mx-auto max-w-7xl px-4 text-center">
         <motion.div
           initial={{ opacity: 0, y: 12, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -40,9 +40,9 @@ export function Hero() {
 
         <SplitHeading
           as="h1"
-          text="The future of commerce is heading North"
+          text={"The future of commerce\nis heading up North"}
           delay={0.3}
-          className="mx-auto mt-7 max-w-[1500px] font-display text-[clamp(2.75rem,7.5vw,6.25rem)] leading-[0.95] font-semibold tracking-[-0.045em]"
+          className="mx-auto mt-7 max-w-4xl font-display lg:max-w-none text-[clamp(2.75rem,7.5vw,6.25rem)] leading-[0.95] font-semibold tracking-[-0.045em]"
         />
 
         <motion.p

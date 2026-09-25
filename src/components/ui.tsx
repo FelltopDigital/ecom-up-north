@@ -1,5 +1,6 @@
 "use client";
 
+import { Fragment } from "react";
 import { motion, useMotionTemplate, useMotionValue, type HTMLMotionProps } from "motion/react";
 import { cn } from "@/lib/cn";
 
@@ -26,7 +27,10 @@ export function Reveal({
   );
 }
 
-/** Headline that reveals word by word, rising out of a mask. */
+/**
+ * Headline that reveals word by word, rising out of a mask.
+ * A "\n" in `text` forces a line break from the lg breakpoint up; below that it wraps naturally.
+ */
 export function SplitHeading({
   text,
   className,
@@ -38,22 +42,34 @@ export function SplitHeading({
   delay?: number;
   as?: "h1" | "h2" | "h3";
 }) {
-  const words = text.split(" ");
+  const lines = text.split("\n").map((line) => line.trim().split(/\s+/));
+  let wordIndex = 0;
   return (
-    <Tag className={cn("text-balance", className)} aria-label={text}>
-      {words.map((word, i) => (
-        <span key={i} aria-hidden className="inline-block overflow-hidden pb-[0.12em] align-top">
-          <motion.span
-            className="inline-block"
-            initial={{ y: "110%", rotate: 4 }}
-            whileInView={{ y: "0%", rotate: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9, delay: delay + i * 0.06, ease: EASE }}
-          >
-            {word}
-            {i < words.length - 1 && " "}
-          </motion.span>
-        </span>
+    <Tag className={cn("text-balance", className)} aria-label={text.replace(/\s*\n\s*/g, " ")}>
+      {lines.map((words, l) => (
+        <Fragment key={l}>
+          {l > 0 && <br aria-hidden className="hidden lg:block" />}
+          {words.map((word) => {
+            const i = wordIndex++;
+            return (
+              <Fragment key={i}>
+                {/* Real space between inline-blocks so lines wrap and centre cleanly */}
+                {i > 0 && " "}
+                <span aria-hidden className="inline-block overflow-hidden pb-[0.12em] align-top">
+                  <motion.span
+                    className="inline-block"
+                    initial={{ y: "110%", rotate: 4 }}
+                    whileInView={{ y: "0%", rotate: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.9, delay: delay + i * 0.06, ease: EASE }}
+                  >
+                    {word}
+                  </motion.span>
+                </span>
+              </Fragment>
+            );
+          })}
+        </Fragment>
       ))}
     </Tag>
   );
